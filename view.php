@@ -85,7 +85,9 @@ if (!$mform->is_cancelled()) {
     //if we have data, then our job here is to save it;
 	if ($formdata = $mform->get_data()) {
 		$newavailability=false;
-		if(!empty(trim($formdata->manualinput))){
+		$manualinput = $formdata->manualinput;
+		$manualinput = $manualinput; 
+		if(!empty(trim($manualinput))){
 			$newavailability = $formdata->manualinput;
 		}else{
 			$original = $DB->get_record('course_modules',array('id'=>$formdata->clonefrom));
