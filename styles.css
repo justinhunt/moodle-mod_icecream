@@ -1,0 +1,23 @@
+
+.mod_icecream_listbuttons input[type="submit"]{
+	width: 400px;
+	/*float: left;*/
+}
+
+.mod_icecream_actionbuttons {
+	display: flex;
+	float: right;
+}
+
+.mod_icecream_divcontainer{
+	display: flex;
+	float: left;
+}
+#id_clonetosummary, #id_clonefromsummary, #id_clonefromcode, #id_clonetocode{
+	width: 330px;
+	background: #EEEEEE;
+	border: #FF;
+	border-width: medium;
+	border-style: solid;
+	padding: 3px;
+}
