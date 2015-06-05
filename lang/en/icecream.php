@@ -45,6 +45,7 @@ $string['someinstancesetting_details'] = 'More infor about Some Instance Setting
 $string['icecreamsettings'] = 'icecream settings';
 $string['icecream:addinstance'] = 'Add a new icecream';
 $string['icecream:view'] = 'View icecream';
+$string['icecream:preview'] = 'Preview icecream';
 $string['icecream:itemview'] = 'View items';
 $string['icecream:itemedit'] = 'Edit items';
 $string['id']='ID';
