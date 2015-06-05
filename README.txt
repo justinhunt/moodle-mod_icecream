@@ -1,23 +1,20 @@
-Template Activity Module for Moodle
+Ice Cream Availability Copier for Moodle
 ==========================
-This is a more modern, and at least for me, more useful template than the others available.
-It contains admin and instance settings stubs, a renderer.php and a module.js . It also contains activity completion on grade, grade book logic, backup and restore and adgoc/scheduled tasks
+This is a simple mod that allows you to copy availability conditions from one Moodle activity to another in the same course.
+
+To Install
+==========
+Clone or unzip+rename into a folder called "icecream" in the moodle mod directory. Visit Site Administration -> Notifications to complete the installation. There are no settings. 
+
+Add an instance of the activity to the course you wish to use it in.
 
 To Use
 ===========
-Replace all instances of ICECREAM with your uppercase module name eg WIDGET
-Replace all instances of MOD_ICECREAM_ with your module name eg MOD_WIDGET_
-Replace all instances of icecream with your module name eg widget
-Replace all instances of 2015 Justin Hunt aka PoodLLGuy with something like "2015 Justin Hunt".
-It is recommended to use a search and replace tool from a text editor or a command line script to do this.
-Trying to do this manually is sure to lead to mistakes.
-Make sure the plugin folder name, name of the langage file in lang/en, files in the backup/moodle2 folder, and files in the classes/task folder are also changed.
+Select the source activity from the drop down list "Clone From." The availability restrictions should appear beneath the list in human readable and code formats. Select the target activity from the drop down list "Clone To." If everything looks ok, press the "save changes" button.
 
-Copy the folder to your [Moodle Site Dir]/mod directory
+If you choose to manually enter availability code into the "manual input" text area, this will take precedence over the "Clone To" dropdown list, and you are a very brave person. May the force be with you.
 
-Install as usual.
-
-Enjoy.
+Hope its useful. Enjoy.
 
 Justin Hunt
 poodllsupport@gmail.com
