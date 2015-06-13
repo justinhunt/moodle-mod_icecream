@@ -59,7 +59,11 @@ class mod_icecream_mod_form extends moodleform_mod {
         $mform->addHelpButton('name', 'icecreamname', MOD_ICECREAM_LANG);
 
         // Adding the standard "intro" and "introformat" fields
-        $this->add_intro_editor();
+        if($CFG->version < 2015051100){
+        	$this->add_intro_editor();
+        }else{
+        	$this->standard_intro_elements();
+		}
 
         //-------------------------------------------------------------------------------
         // add standard elements, common to all modules
