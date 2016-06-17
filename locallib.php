@@ -50,6 +50,26 @@ class mod_icecream_cloneform extends moodleform {
     }
 }
 
+class mod_icecream_sectioncloneform extends moodleform {
+
+    function definition() {
+        global $DB;
+		list($allsections) = $this->_customdata;
+        $mform = $this->_form;
+		$mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+        $mform->addElement('hidden', 'course');
+        $mform->setType('course', PARAM_INT);
+        $mform->addElement('textarea', 'manualinput', get_string('manualinput', MOD_ICECREAM_LANG));
+		$mform->setType('manualinput', PARAM_TEXT);
+		$mform->addElement('select', 'sectionclonefrom',get_string('clonefrom',MOD_ICECREAM_LANG),$allsections,array('onchange'=>'M.mod_icecream.section_doclonefrom()'));
+		$mform->addElement('static', 'clonefromsummarycode',null,'<div class="mod_icecream_divcontainer"><div id="id_sectionclonefromsummary"></div><div id="id_sectionclonefromcode"></div></div>');
+		$mform->addElement('select', 'sectioncloneto',get_string('cloneto',MOD_ICECREAM_LANG),$allsections,array('onchange'=>'M.mod_icecream.section_docloneto()'));
+		$mform->addElement('static', 'sectionclonetosummarycode',null,'<div class="mod_icecream_divcontainer"><div id="id_sectionclonetosummary"></div><div id="id_sectionclonetocode"></div></div>');
+        $this->add_action_buttons();
+    }
+}
+
 class mod_icecream_helper{
 
 	
@@ -64,6 +84,8 @@ class mod_icecream_helper{
 		}
 		return $alldata;
 	}
+	
+
 	
 	static function get_availabilitysummary($course){
 		$alldata = array();
@@ -85,6 +107,37 @@ class mod_icecream_helper{
 		}
 		return $alldata;
 	}
-
 	
+	static function get_section_availabilitysummary($course){
+		$alldata = array();
+		$modinfo = get_fast_modinfo($course);
+		$sections = $modinfo->get_sections();
+		foreach($sections as $section=>$cms){
+			$section_info = $modinfo->get_section_info($section, MUST_EXIST);
+			$infoobject = new \core_availability\info_section($section_info );
+			$alldata[$section] = $infoobject->get_full_information();
+		}
+		return $alldata;
+	}
+	
+	static function get_section_availabilitycode($course){
+		$alldata = array();
+		$modinfo = get_fast_modinfo($course);
+		$sections = $modinfo->get_section_info_all();
+		foreach($sections as $section){
+			$alldata[$section->section] = $section->availability;
+		}
+		return $alldata;
+	}
+	
+	static function get_all_sections($course){
+		$modinfo = get_fast_modinfo($course);
+		$sections = $modinfo->get_sections();
+		$alldata = array();	
+		foreach($sections as $section=>$cms){
+				$alldata[$section]= get_string('section') .':' . $section  ;
+		}
+		return $alldata;
+		
+	}
 }

@@ -79,6 +79,10 @@ $allactivities = mod_icecream_helper::get_all_activities($course);
 $availabilitysummary = mod_icecream_helper::get_availabilitysummary($course);
 $availabilitycode= mod_icecream_helper::get_availabilitycode($course);
 
+$allsections = mod_icecream_helper::get_all_sections($course);
+$sectionavailabilitysummary = mod_icecream_helper::get_section_availabilitysummary($course);
+$sectionavailabilitycode= mod_icecream_helper::get_section_availabilitycode($course);
+
 $mform = new mod_icecream_cloneform(null,array($allactivities));
 //if the cancel button was pressed, we are out of here
 if (!$mform->is_cancelled()) {
@@ -107,6 +111,34 @@ if (!$mform->is_cancelled()) {
 	}
 }
 
+$mform = new mod_icecream_sectioncloneform(null,array($allsections));
+//if the cancel button was pressed, we are out of here
+if (!$mform->is_cancelled()) {
+    //if we have data, then our job here is to save it;
+	if ($formdata = $mform->get_data()) {
+		$newavailability=false;
+		$manualinput = $formdata->manualinput;
+		$manualinput = $manualinput; 
+		if(!empty(trim($manualinput))){
+			$newavailability = $formdata->manualinput;
+		}else{
+			$original = $DB->get_record('course_sections',array('course'=>$COURSE->id,'section'=>$formdata->sectionclonefrom));
+			if($original){
+				$newavailability = $original->availability;
+			 }
+		}
+		if($newavailability){
+			$DB->set_field('course_sections', 'availability', $newavailability, array('course'=>$COURSE->id,'section'=>$formdata->sectioncloneto));
+			$success='yes';
+			rebuild_course_cache($course->id);
+			redirect($PAGE->url,get_string('updatedsettings',MOD_ICECREAM_LANG),3); 
+			return;
+		}else{
+			$success='no';
+		}
+	}
+}
+
 /// Set up the page header
 $PAGE->set_url('/mod/icecream/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($moduleinstance->name));
@@ -125,7 +157,7 @@ $jsmodule = array(
 	'requires' => array()
 );
 //here we set up any info we need to pass into javascript
-$opts =Array('availabilitysummary'=>$availabilitysummary,'availabilitycode'=>$availabilitycode);
+$opts =Array('availabilitysummary'=>$availabilitysummary,'availabilitycode'=>$availabilitycode,'sectionavailabilitysummary'=>$sectionavailabilitysummary, 'sectionavailabilitycode'=>$sectionavailabilitycode );
 
 //this inits the M.mod_icecream thingy, after the page has loaded.
 $PAGE->requires->js_init_call('M.mod_icecream.init', array($opts),false,$jsmodule);
@@ -155,6 +187,15 @@ $data=new stdClass();
 $data->id=$cm->id;
 $data->course=$course->id;
 $mform->set_data($data);
+echo $renderer->show_form_title('activity');
+$mform->display();
+
+$mform = new mod_icecream_sectioncloneform(null,array($allsections));
+$data=new stdClass();
+$data->id=$cm->id;
+$data->course=$course->id;
+$mform->set_data($data);
+echo $renderer->show_form_title('section');
 $mform->display();
 // Finish the page
 echo $renderer->footer();

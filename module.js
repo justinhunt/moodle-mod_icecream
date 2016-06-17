@@ -26,6 +26,8 @@ M.mod_icecream = {
 	gY: null,
 	gAvailabilitySummary: null,
 	gAvailabilityCode: null,
+	gSectionAvailabilitySummary: null,
+	gSectionAvailabilityCode: null,
 
 
 	 /**
@@ -36,6 +38,8 @@ M.mod_icecream = {
     	this.gY = Y;
     	this.gAvailabilitySummary = opts['availabilitysummary'];
     	this.gAvailabilityCode = opts['availabilitycode'];
+    	this.gSectionAvailabilitySummary = opts['sectionavailabilitysummary'];
+    	this.gSectionAvailabilityCode = opts['sectionavailabilitycode'];
     },
     doclonefrom: function(){
     	var lb = this.get_listbox('clonefrom');
@@ -58,5 +62,24 @@ M.mod_icecream = {
     },
     get_listbox: function(listboxname){
 		return  this.gY.one("select[name='" + listboxname + "']");
-	}
+	},
+	section_doclonefrom: function(){
+    	var lb = this.get_listbox('sectionclonefrom');
+    	var sum = this.gY.one('#id_sectionclonefromsummary');
+    	var cod = this.gY.one('#id_sectionclonefromcode');
+    	lb.all('option:checked').each(function(){
+    		sum.set('innerHTML',M.mod_icecream.gSectionAvailabilitySummary[this.get('value')]);
+    		cod.set('innerHTML',M.mod_icecream.gSectionAvailabilityCode[this.get('value')]);
+		});
+    
+    },
+    section_docloneto: function(){
+    	var lb = this.get_listbox('sectioncloneto');
+    	var sum = this.gY.one('#id_sectionclonetosummary');
+    	var cod = this.gY.one('#id_sectionclonetocode');
+    	lb.all('option:checked').each(function(){
+    		sum.set('innerHTML',M.mod_icecream.gSectionAvailabilitySummary[this.get('value')]);
+    		cod.set('innerHTML',M.mod_icecream.gSectionAvailabilityCode[this.get('value')]);
+		});
+    }
 };

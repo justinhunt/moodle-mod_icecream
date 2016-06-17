@@ -87,6 +87,24 @@ class mod_icecream_renderer extends plugin_renderer_base {
 		$ret .= $this->output->box_end();
         return $ret;
     }
+    
+     /**
+     *
+     */
+    public function show_form_title($formname) {
+    	switch($formname){
+    		case 'activity':
+    			$title = 'Activity Copy';
+    			break;
+    		case 'section':
+				$title = 'Section Copy';    		
+    			break;
+    	}
+		$ret = $this->output->box_start();
+		$ret .= $this->output->heading($title, 3, 'main');
+		$ret .= $this->output->box_end();
+        return $ret;
+    }
 
 	 /**
      *
