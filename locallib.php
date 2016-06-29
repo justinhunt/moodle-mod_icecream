@@ -44,7 +44,8 @@ class mod_icecream_cloneform extends moodleform {
 		$mform->setType('manualinput', PARAM_TEXT);
 		$mform->addElement('select', 'clonefrom',get_string('clonefrom',MOD_ICECREAM_LANG),$allactivities,array('onchange'=>'M.mod_icecream.doclonefrom()'));
 		$mform->addElement('static', 'clonefromsummarycode',null,'<div class="mod_icecream_divcontainer"><div id="id_clonefromsummary"></div><div id="id_clonefromcode"></div></div>');
-		$mform->addElement('select', 'cloneto',get_string('cloneto',MOD_ICECREAM_LANG),$allactivities,array('onchange'=>'M.mod_icecream.docloneto()'));
+		$cloneto = $mform->addElement('select', 'cloneto',get_string('cloneto',MOD_ICECREAM_LANG),$allactivities,array('onchange'=>'M.mod_icecream.docloneto()','size'=>10));
+		$cloneto->setMultiple(true);
 		$mform->addElement('static', 'clonetosummarycode',null,'<div class="mod_icecream_divcontainer"><div id="id_clonetosummary"></div><div id="id_clonetocode"></div></div>');
         $this->add_action_buttons();
     }
@@ -64,7 +65,8 @@ class mod_icecream_sectioncloneform extends moodleform {
 		$mform->setType('manualinput', PARAM_TEXT);
 		$mform->addElement('select', 'sectionclonefrom',get_string('clonefrom',MOD_ICECREAM_LANG),$allsections,array('onchange'=>'M.mod_icecream.section_doclonefrom()'));
 		$mform->addElement('static', 'clonefromsummarycode',null,'<div class="mod_icecream_divcontainer"><div id="id_sectionclonefromsummary"></div><div id="id_sectionclonefromcode"></div></div>');
-		$mform->addElement('select', 'sectioncloneto',get_string('cloneto',MOD_ICECREAM_LANG),$allsections,array('onchange'=>'M.mod_icecream.section_docloneto()'));
+		$cloneto = $mform->addElement('select', 'sectioncloneto',get_string('cloneto',MOD_ICECREAM_LANG),$allsections,array('onchange'=>'M.mod_icecream.section_docloneto()','size'=>10));
+		$cloneto->setMultiple(true);
 		$mform->addElement('static', 'sectionclonetosummarycode',null,'<div class="mod_icecream_divcontainer"><div id="id_sectionclonetosummary"></div><div id="id_sectionclonetocode"></div></div>');
         $this->add_action_buttons();
     }

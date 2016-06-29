@@ -52,7 +52,7 @@ M.mod_icecream = {
     
     },
     docloneto: function(){
-    	var lb = this.get_listbox('cloneto');
+    	var lb = this.get_listbox('cloneto[]');
     	var sum = this.gY.one('#id_clonetosummary');
     	var cod = this.gY.one('#id_clonetocode');
     	lb.all('option:checked').each(function(){
@@ -74,7 +74,7 @@ M.mod_icecream = {
     
     },
     section_docloneto: function(){
-    	var lb = this.get_listbox('sectioncloneto');
+    	var lb = this.get_listbox('sectioncloneto[]');
     	var sum = this.gY.one('#id_sectionclonetosummary');
     	var cod = this.gY.one('#id_sectionclonetocode');
     	lb.all('option:checked').each(function(){

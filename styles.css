@@ -13,7 +13,8 @@
 	display: flex;
 	float: left;
 }
-#id_clonetosummary, #id_clonefromsummary, #id_clonefromcode, #id_clonetocode{
+#id_clonetosummary, #id_clonefromsummary, #id_clonefromcode, #id_clonetocode,
+#id_sectionclonetosummary, #id_sectionclonefromsummary, #id_sectionclonefromcode, #id_sectionclonetocode{
 	width: 330px;
 	background: #EEEEEE;
 	border: #FF;

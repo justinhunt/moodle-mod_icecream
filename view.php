@@ -100,7 +100,9 @@ if (!$mform->is_cancelled()) {
 			 }
 		}
 		if($newavailability){
-			$DB->set_field('course_modules', 'availability', $newavailability, array('id' => $formdata->cloneto));
+			foreach($formdata->cloneto as $theitem){
+				$DB->set_field('course_modules', 'availability', $newavailability, array('id' => $theitem));
+			}
 			$success='yes';
 			rebuild_course_cache($course->id);
 			redirect($PAGE->url,get_string('updatedsettings',MOD_ICECREAM_LANG),3); 
@@ -128,7 +130,10 @@ if (!$mform->is_cancelled()) {
 			 }
 		}
 		if($newavailability){
-			$DB->set_field('course_sections', 'availability', $newavailability, array('course'=>$COURSE->id,'section'=>$formdata->sectioncloneto));
+			foreach($formdata->sectioncloneto as $thesection){
+				$DB->set_field('course_sections', 'availability', $newavailability, 				array('course'=>$COURSE->id,
+				'section'=>$thesection));
+			}
 			$success='yes';
 			rebuild_course_cache($course->id);
 			redirect($PAGE->url,get_string('updatedsettings',MOD_ICECREAM_LANG),3); 
